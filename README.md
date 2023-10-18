@@ -45,7 +45,7 @@ Steps I always have to go through when setting up a new NodeJS/PostgreSQL back-e
 - `git-crypt init`
 - Get the gitcrypt key `dev` from someone. ONLY developers which handle deployment should have `prod`. 
 - Place it under `.git/git-crypt/keys/`.
-- git-crypt unlock: `git-crypt unlock .git/git-crypt/keys/dev`.
+- git-crypt unlock: `git-crypt unlock .git/git-crypt/keys/key_name_here`.
 
 
 ## <a name="database-psql"></a> Database/Postgresql ##
