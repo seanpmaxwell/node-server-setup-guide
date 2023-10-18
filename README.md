@@ -36,7 +36,7 @@ Steps I always have to go through when setting up a new NodeJS/PostgreSQL back-e
     - Run `ssh -T git@github.com`. Type yes at the prompt.
     - If if worked you should see:
         - Hi excid3! You've successfully authenticated, but GitHub does not provide shell access.
-    - Clone the repo: `git clone git@github.com:seanpmaxwell/PhotonSuite.git`
+    - Clone the repo: `git clone git@github.com:seanpmaxwell/repo_name_here`
 
 
 ## <a name="encrypt"></a> Encrypting .env files ##
