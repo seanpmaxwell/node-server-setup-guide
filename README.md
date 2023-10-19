@@ -49,44 +49,24 @@ Steps I always have to go through when setting up a new NodeJS/PostgreSQL back-e
 - git-crypt unlock: `git-crypt unlock .git/git-crypt/keys/key_name_here`.
 
 
-## <a name="database-psql"></a> Database/Postgresql ##
-- Install postgresql:
-    - `sudo apt update`
-    - `sudo apt install postgresql postgresql-contrib`
-- Start postgres: `sudo service postgresql start`
-- Create a postgres superuser for connecting locally. Postgres assumes that for database role,
-there is a cooresponding database and linux role with the same name. So we need to create both a 
-postgres user, database, and linux user.
-    - Open up the file `development.env`
-    - Notice the values for `PGUSER` and `PGPASSWORD`.
-    - Run: `sudo -u postgres createuser --interactive`.
-        - For name of the new role enter the value for `PGUSER`.
-        - Enter 'y' for `Shall the new role be a superuser?`.
-    - Create a new database for the superuser: `sudo -u postgres createdb "Value for PGUSER"`.
-    - Create a linux role for the new user: `sudo adduser "Value for PGUSER"`
-        - Enter any value you want for the password but don't forget it.
-        - Just press enter for the remaining prompts.
-    - Run: `sudo -u "Value for PGUSER" psql`
-        - Type `\password`
-        - Enter the value for `PGPASSWORD`.
-        - Type `\q` to return to the normal command prompt.
-- Following commands must be done from `db/` folder.
-- Setup db. This has to be done be done before connecting. Option for environment file `--env` 
-    (i.e. development):
-    - Run `npm i` to install dependencies if you haven't done so yet.
-    - Example: `npm run setup -- --env=development`.
-    - This has to be done for remote databases too. Setup script accounts for this with the 
-    `LOCAL` environment variable.
-- Handle Migrations (default envivornment is `development`):
-    - Create new. Name it based on what the migration does and don't use spaces:
-        - `npm run mig-create -- --migName="Migration Name"`
-    - Run migrations. This will run all migrations not yet run: 
-        - `npm run mig-run -- --env="Environment File"`.
-    - Rollback migration:
-        - `npm run mig-rb -- --env="Environment File"`.
-- Inserting dummy-data:
-    - Create a `.ts` file under: `db/dummyData/`
-    - Make sure to `export default` the root function.
-    - Run the file with: `npm run dummy-data -- --script="name of the file"`
-    - You can still use the `--env` option to specify the environment (default `development`).
-    - Example to insert users: `npm run dummy-data -- --script=users.ts`
+### <a name="database-psql"></a> Setup database (Ubuntu)
+- Install postgresq.
+ - `sudo apt update`
+ - `sudo apt install postgresql postgresql-contrib`
+ - `sudo service postgresql start`
+- To use postgres, we need a role and a database that matches the roles name:
+ - `sudo -u postgres createuser --interactive`
+  - Enter your linux user name:
+  - Enter 'y' for Shall the new role be a superuser?
+- Create a new database for the superuser: 
+ - `sudo -u postgres createdb "linux user name"`
+- Create a password the new pg user: 
+ - `sudo -u "linux user name" psql`
+ - `\password`
+ - Enter a password. <b>DO NOT</b> forget it.
+ - `\q`
+- Setup the application database (we need to use the superuser we just made to create new databases).
+  - `npm run setup:db -- --env="env name" --pgSuperUser="postgres super user" --pgSuperPwd="postgres super user pwd"`
+- Run migrations: `NODE_ENV="env name" npm run mig:run`
+- Run dummy-data script: `npm run dummy-data -- "script name" (i.e. addNotifications)`. If you want to create a dummy-data script place it under `src/repos/__dummy_data__/`.
+
