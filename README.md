@@ -42,7 +42,7 @@ Steps I always have to go through when setting up a new NodeJS/PostgreSQL back-e
 ## <a name="encrypt"></a> Encrypting .env files ##
 - Run a git commit if you've made any changes to the repo. Must have clean working directory to run unlock.
 - Install git-crypt: `sudo apt-get install -y git-crypt`.
-- Go into the project directory: `cd PhotonSuite`.
+- In the terminal, go into the project directory.
 - `git-crypt init`
 - Get the gitcrypt key `dev` from someone. ONLY developers which handle deployment should have `prod`. 
 - Place it under `.git/git-crypt/keys/`.
