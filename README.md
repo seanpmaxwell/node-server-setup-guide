@@ -56,6 +56,7 @@ Steps I always have to go through when setting up a new NodeJS/PostgreSQL back-e
  - `sudo service postgresql start`
 - To use postgres, we need a role and a database that matches the roles name:
  - `sudo -u postgres createuser --interactive`
+  - If you get this error `could not change directory to "/home/user_name": Permission denied` then you maybe need to run `sudo chmod og+rX /home /home/user_name`
   - Enter your linux user name:
   - Enter 'y' for Shall the new role be a superuser?
 - Create a new database for the superuser: 
