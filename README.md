@@ -66,8 +66,3 @@ Steps I always have to go through when setting up a new NodeJS/PostgreSQL back-e
  - `\password`
  - Enter a password. <b>DO NOT</b> forget it.
  - `\q`
-- Setup the application database (we need to use the superuser we just made to create new databases).
-  - `npm run setup:db -- --env="env name" --pgSuperUser="postgres super user" --pgSuperPwd="postgres super user pwd"`
-- Run migrations: `NODE_ENV="env name" npm run mig:run`
-- Run dummy-data script: `npm run dummy-data -- "script name" (i.e. addNotifications)`. If you want to create a dummy-data script place it under `src/repos/__dummy_data__/`.
-
