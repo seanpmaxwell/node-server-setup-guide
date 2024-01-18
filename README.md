@@ -43,10 +43,13 @@ Steps I always have to go through when setting up a new NodeJS/PostgreSQL back-e
 - Run a git commit if you've made any changes to the repo. Must have clean working directory to run unlock.
 - Install git-crypt: `sudo apt-get install -y git-crypt`.
 - In the terminal, go into the project directory.
-- `git-crypt init`
-- Get the gitcrypt key `dev` from someone. ONLY developers which handle deployment should have `prod`. 
-- Place it under `.git/git-crypt/keys/`.
-- git-crypt unlock: `git-crypt unlock .git/git-crypt/keys/key_name_here`.
+- To encrypt a file
+- - Make sure the file is specified under .gitattributes
+- - run `git-crypt init`
+- To decrypt a file
+- - Get the gitcrypt key `dev` from someone. ONLY developers which handle deployment should have `prod`. 
+- - Place it under `.git/git-crypt/keys/`. (may need to manually create the the parent dirs if they're not there)
+- - git-crypt unlock: `git-crypt unlock .git/git-crypt/keys/key_name_here`.
 
 
 ### <a name="database-psql"></a> Setup database (Ubuntu)
